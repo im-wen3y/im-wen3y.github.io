@@ -43,6 +43,9 @@ function handleToggle(id) {
 
 **1. 값은 바뀌는가? (JavaScript)** — 바뀐다.
 
+**콘솔에서 확인**
+{: .filename}
+
 ```js
 const todos = [{ id: 2, done: false }];
 todos.forEach((todo) => { todo.done = true; });
@@ -74,6 +77,9 @@ todos[0].done;  // true
 
 두 번째로 `filter`를 써봤는데 이건 더 엉망이었다.
 
+**TodoList.jsx — 실패한 시도**
+{: .filename}
+
 ```js
 // 실패한 시도
 const filteredTodo = todos.filter(todo => todo.id === id);
@@ -82,6 +88,9 @@ setTodos(prev => [...prev, filteredTodo]);  // 항목이 4개가 됨
 ```
 
 `filter`는 골라내기고, 내가 필요한 건 **같은 길이의 새 배열 만들기**였다. 그래서 `map`으로 갔다.
+
+**TodoList.jsx — 최종**
+{: .filename}
 
 ```js
 function handleToggle(id) {

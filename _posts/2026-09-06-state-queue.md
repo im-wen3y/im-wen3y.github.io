@@ -13,6 +13,9 @@ setState가 비동기라는 건 알고 있었는데, 그게 이 코드에서 정
 
 요구사항: **초기 수량 1, 버튼을 한 번 누르면 2개 늘어난다.**
 
+**Quantity.jsx**
+{: .filename}
+
 ```diff
  function handleClick() {
    setQuantity(quantity + 1);
@@ -33,6 +36,9 @@ setState가 비동기라는 건 알고 있었다. 그래서 이렇게 적었다.
 
 정리하고 나니 이렇게 되는 거였다.
 
+**Quantity.jsx — 실제로 실행되는 것**
+{: .filename}
+
 ```js
 setQuantity(quantity + 1);  // 1 + 1
 setQuantity(quantity + 1);  // 여기도 1 + 1
@@ -44,6 +50,9 @@ setQuantity(quantity + 1);  // 여기도 1 + 1
 요구사항은 2 증가인데 실제로는 1 증가. 승인하지 않고 수정 요청.
 
 ## 수정 제안
+
+**Quantity.jsx — 수정 제안**
+{: .filename}
 
 ```js
 setQuantity(q => q + 1);
@@ -63,6 +72,9 @@ setQuantity(q => q + 1);
 ## 섞으면 순서가 결과를 바꾼다
 
 이해했는지 확인하려고 순서를 바꿔봤다.
+
+**순서를 바꿔본 것**
+{: .filename}
 
 ```js
 // n === 0
