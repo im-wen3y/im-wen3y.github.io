@@ -14,6 +14,9 @@ date: 2026-09-06 12:00:00 +0900
 
 요구사항: **체크박스를 누르면 그 항목의 완료 상태만 바뀌어 화면에 반영된다. 나머지는 그대로.**
 
+**TodoList.jsx**
+{: .filename}
+
 ```jsx
 function handleToggle(id) {
   todos.forEach((todo) => {

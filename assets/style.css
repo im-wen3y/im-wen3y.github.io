@@ -66,18 +66,63 @@ code{
   padding:1px 5px;
   border-radius:3px;
 }
-pre{
+/* 코드 블록 — Rouge(Jekyll 기본 하이라이터)가 붙이는 클래스에 색만 입힌다.
+   플러그인·JS 없음. 코드 블록은 두 테마 모두에서 어둡게 고정. */
+/* 색은 shiki의 material-theme-palenight 값을 그대로 가져왔다.
+   shiki 자체는 빌드 파이프라인이 필요해 Jekyll 무플러그인 구성엔 안 맞는다. */
+:root{
+  --code-bg:#292d3e;
+  --code-fg:#a6accd;
+  --code-dim:#676e95;    /* 주석 */
+  --code-key:#c792ea;    /* import, const, return */
+  --code-str:#c3e88d;    /* 문자열 */
+  --code-fn:#82aaff;     /* 함수·변수 */
+  --code-attr:#f07178;   /* 태그·속성·프로퍼티 */
+  --code-num:#f78c6c;    /* 숫자 */
+  --code-op:#89ddff;     /* 연산자·구두점 */
+}
+pre.highlight, div.highlighter-rouge pre, pre{
   font-family:"IBM Plex Mono", ui-monospace, monospace;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-left:4px solid var(--ink-soft);
-  border-radius:4px;
-  padding:14px 16px;
+  background:var(--code-bg);
+  color:var(--code-fg);
+  border:none;
+  border-radius:0 0 8px 8px;
+  padding:16px 18px;
+  margin:0;
   overflow-x:auto;
   font-size:13.5px;
-  line-height:1.65;
+  line-height:1.7;
 }
-pre code{background:none; color:var(--ink); padding:0;}
+div.highlighter-rouge, figure.highlight{
+  margin:22px 0;
+  border-radius:8px;
+  overflow:hidden;
+}
+/* 코드 블록 위 파일명 바: 코드 펜스 바로 앞 문단에 {: .filename} 을 붙인다 */
+p.filename{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:12.5px;
+  color:var(--code-dim);
+  background:#1e222a;
+  padding:11px 18px;
+  margin:22px 0 0;
+  border-radius:8px 8px 0 0;
+}
+p.filename + div.highlighter-rouge{margin-top:0; border-radius:0 0 8px 8px;}
+p.filename + div.highlighter-rouge pre{border-radius:0 0 8px 8px;}
+pre code{background:none; color:inherit; padding:0; font-size:inherit;}
+
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs{color:var(--code-dim); font-style:italic;}
+.highlight .k, .highlight .kd, .highlight .kc, .highlight .kr, .highlight .kn{color:var(--code-key);}
+.highlight .o, .highlight .ow{color:var(--code-op);}
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .se, .highlight .dl{color:var(--code-str);}
+.highlight .nf, .highlight .nx, .highlight .nb{color:var(--code-fn);}
+.highlight .nt, .highlight .nc{color:var(--code-attr);}
+.highlight .na, .highlight .py, .highlight .vi{color:var(--code-attr);}
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .kt{color:var(--code-num);}
+.highlight .p{color:var(--code-op);}
+.highlight .err{color:var(--code-fg);}
+.highlight .gd{color:#f78c8c;} .highlight .gi{color:#a5d6a7;}
 blockquote{
   margin:20px 0;
   padding:2px 0 2px 16px;
