@@ -8,3 +8,4 @@ timezone: Asia/Seoul
 exclude:
   - README.md
   - TEMPLATE.md
+  - DESIGN.md
