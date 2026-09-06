@@ -7,3 +7,4 @@ timezone: Asia/Seoul
 # 카테고리·태그·페이지네이션은 글이 20개쯤 쌓이면 그때.
 exclude:
   - README.md
+  - TEMPLATE.md
