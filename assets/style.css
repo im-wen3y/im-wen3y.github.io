@@ -87,6 +87,16 @@ blockquote{
 table{border-collapse:collapse; width:100%; font-size:14px; margin:20px 0;}
 th,td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
 th{background:var(--surface); font-weight:600;}
+.intro{
+  border-left:3px solid var(--stamp);
+  padding:2px 0 2px 18px;
+  margin:0 0 40px;
+  font-size:15px;
+  color:var(--ink-soft);
+}
+.intro p{margin:0 0 12px;}
+.intro p:last-child{margin-bottom:0;}
+.intro b{color:var(--ink); font-weight:600;}
 .post-list{list-style:none; padding:0; margin:0;}
 .post-list li{
   display:flex;
