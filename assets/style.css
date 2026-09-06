@@ -1,137 +1,244 @@
+/* macOS Big Sur 스타일.
+   창 하나(.window) 안에 글이 들어간다. 반투명 + 배경 흐림 + 시스템 폰트. */
+
 :root{
-  --paper:#f7f4ec;
-  --ink:#2b2a26;
-  --ink-soft:#6b6759;
-  --line:#d8d2c0;
-  --surface:#fffdf7;
-  --stamp:#c1442d;
-  --stamp-soft:#f5e2dd;
+  --wall-1:#cfe0f7;      /* 바탕화면 그라디언트 */
+  --wall-2:#e7d9f2;
+  --wall-3:#f6e7d8;
+  --win:rgba(255,255,255,.72);
+  --win-edge:rgba(255,255,255,.75);
+  --chrome:rgba(246,246,248,.82);
+  --ink:#1d1d1f;
+  --ink-soft:#6e6e73;
+  --sep:rgba(0,0,0,.10);
+  --hover:rgba(0,0,0,.045);
+  --accent:#0071e3;      /* macOS 링크 블루 */
+  --shadow:0 24px 70px rgba(35,30,60,.22), 0 3px 10px rgba(35,30,60,.10);
+
+  /* 코드 패널 — shiki material-theme-palenight */
+  --code-bg:#292d3e;
+  --code-bar:#323647;
+  --code-fg:#a6accd;
+  --code-dim:#8f97b8;
+  --code-key:#c792ea;
+  --code-str:#c3e88d;
+  --code-fn:#82aaff;
+  --code-attr:#f07178;
+  --code-num:#f78c6c;
+  --code-op:#89ddff;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#232019;
-    --ink:#f2ede1;
-    --ink-soft:#a89f8c;
-    --line:#3c372c;
-    --surface:#2b271f;
-    --stamp:#e2604a;
-    --stamp-soft:#3d2723;
+    --wall-1:#1c2340;
+    --wall-2:#2b2247;
+    --wall-3:#3a2436;
+    --win:rgba(38,38,42,.72);
+    --win-edge:rgba(255,255,255,.14);
+    --chrome:rgba(52,52,58,.82);
+    --ink:#f5f5f7;
+    --ink-soft:#9b9ba1;
+    --sep:rgba(255,255,255,.12);
+    --hover:rgba(255,255,255,.06);
+    --accent:#4aa3ff;
+    --shadow:0 24px 70px rgba(0,0,0,.5), 0 3px 10px rgba(0,0,0,.35);
   }
 }
+
 *{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;}
 body{
   margin:0;
-  background:var(--paper);
+  min-height:100vh;
+  padding:clamp(16px,5vw,56px) clamp(12px,4vw,32px);
+  background:
+    radial-gradient(120% 90% at 12% 0%, var(--wall-1) 0%, transparent 55%),
+    radial-gradient(110% 90% at 88% 12%, var(--wall-2) 0%, transparent 60%),
+    linear-gradient(160deg, var(--wall-3) 0%, var(--wall-1) 100%);
+  background-attachment:fixed;
   color:var(--ink);
-  font-family:"IBM Plex Sans KR", system-ui, sans-serif;
+  font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", system-ui, sans-serif;
   font-size:16px;
   line-height:1.75;
+  letter-spacing:-0.003em;
 }
-header.site, main, footer.site{
-  max-width:680px;
+
+/* ── 창 ────────────────────────────────── */
+.window{
+  max-width:780px;
   margin:0 auto;
-  padding:0 20px;
-}
-header.site{padding-top:44px; padding-bottom:28px;}
-.site-title{
-  font-weight:700;
-  font-size:19px;
-  color:var(--ink);
-  text-decoration:none;
-  letter-spacing:-0.01em;
-}
-.site-desc{
-  font-family:"IBM Plex Mono", ui-monospace, monospace;
-  font-size:12.5px;
-  color:var(--ink-soft);
-  margin:6px 0 0;
-}
-h1{font-size:26px; line-height:1.4; text-wrap:balance; margin:0 0 8px;}
-h2{font-size:19px; margin:40px 0 12px; text-wrap:balance;}
-h3{font-size:16px; margin:28px 0 8px;}
-a{color:var(--stamp);}
-.meta{
-  font-family:"IBM Plex Mono", monospace;
-  font-size:12.5px;
-  color:var(--ink-soft);
-  margin:0 0 28px;
-  padding-bottom:20px;
-  border-bottom:2px dashed var(--line);
-}
-code{
-  font-family:"IBM Plex Mono", ui-monospace, monospace;
-  font-size:0.9em;
-  background:var(--stamp-soft);
-  color:var(--stamp);
-  padding:1px 5px;
-  border-radius:3px;
-}
-/* 코드 블록 — Rouge(Jekyll 기본 하이라이터)가 붙이는 클래스에 색만 입힌다.
-   플러그인·JS 없음. 코드 블록은 두 테마 모두에서 어둡게 고정. */
-/* 색은 shiki의 material-theme-palenight 값을 그대로 가져왔다.
-   shiki 자체는 빌드 파이프라인이 필요해 Jekyll 무플러그인 구성엔 안 맞는다. */
-:root{
-  --code-bg:#292d3e;
-  --code-fg:#a6accd;
-  --code-dim:#676e95;    /* 주석 */
-  --code-key:#c792ea;    /* import, const, return */
-  --code-str:#c3e88d;    /* 문자열 */
-  --code-fn:#82aaff;     /* 함수·변수 */
-  --code-attr:#f07178;   /* 태그·속성·프로퍼티 */
-  --code-num:#f78c6c;    /* 숫자 */
-  --code-op:#89ddff;     /* 연산자·구두점 */
-}
-pre.highlight, div.highlighter-rouge pre, pre{
-  font-family:"IBM Plex Mono", ui-monospace, monospace;
-  background:var(--code-bg);
-  color:var(--code-fg);
-  border:none;
-  border-radius:0 0 8px 8px;
-  padding:16px 18px;
-  margin:0;
-  overflow-x:auto;
-  font-size:13.5px;
-  line-height:1.7;
-}
-/* 코드 블록을 macOS 창처럼: 신호등 버튼 + 가운데 타이틀 + 창 그림자 */
-div.highlighter-rouge, figure.highlight{
-  margin:22px 0;
-  border-radius:10px;
+  background:var(--win);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  backdrop-filter:blur(30px) saturate(180%);
+  border:1px solid var(--win-edge);
+  border-radius:12px;
+  box-shadow:var(--shadow);
   overflow:hidden;
-  box-shadow:0 12px 32px rgba(20,16,10,.16), 0 2px 6px rgba(20,16,10,.10);
 }
-/* 코드 블록 위 타이틀바: 코드 펜스 바로 앞 문단에 {: .filename} 을 붙인다 */
-p.filename{
+.titlebar{
   position:relative;
-  font-family:"IBM Plex Mono", ui-monospace, monospace;
-  font-size:12.5px;
-  color:var(--code-dim);
-  background:#323647;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  padding:10px 18px 10px 84px;
-  margin:22px 0 0;
-  border-radius:10px 10px 0 0;
-  box-shadow:0 -2px 24px rgba(20,16,10,.10);
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--chrome);
+  border-bottom:1px solid var(--sep);
 }
-p.filename strong{font-weight:400;}
-p.filename::before{           /* 신호등 3개 */
-  content:"";
+.lights{
   position:absolute;
-  left:18px; top:50%;
+  left:14px; top:50%;
   width:12px; height:12px;
   margin-top:-6px;
   border-radius:50%;
   background:#ff5f57;
   box-shadow:20px 0 0 #febc2e, 40px 0 0 #28c840;
 }
-p.filename + div.highlighter-rouge{
-  margin-top:0;
-  border-radius:0 0 10px 10px;
-  box-shadow:0 12px 32px rgba(20,16,10,.16);
+.titlebar-name{
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink-soft);
+  max-width:60%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
+.toolbar{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  padding:14px 28px;
+  border-bottom:1px solid var(--sep);
+}
+.home{
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.toolbar-desc{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+main{padding:28px 28px 8px;}
+footer{
+  padding:16px 28px 20px;
+  border-top:1px solid var(--sep);
+  font-size:12.5px;
+}
+footer a{color:var(--ink-soft); text-decoration:none;}
+@media (max-width:560px){
+  main{padding:22px 18px 4px;}
+  .toolbar{padding:12px 18px; flex-direction:column; gap:2px;}
+  footer{padding:14px 18px 18px;}
+}
+
+/* ── 본문 ──────────────────────────────── */
+h1{font-size:27px; line-height:1.35; letter-spacing:-0.02em; margin:0 0 8px; text-wrap:balance;}
+h2{font-size:19px; letter-spacing:-0.01em; margin:38px 0 12px; text-wrap:balance;}
+h3{font-size:16px; margin:26px 0 8px;}
+a{color:var(--accent);}
+.meta{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  margin:0 0 26px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--sep);
+}
+.back{margin:44px 0 8px; font-size:14px;}
+.back a{text-decoration:none;}
+blockquote{
+  margin:20px 0;
+  padding:12px 16px;
+  background:var(--hover);
+  border-radius:8px;
+  color:var(--ink-soft);
+}
+blockquote p{margin:0;}
+blockquote p + p{margin-top:8px;}
+
+table{border-collapse:separate; border-spacing:0; width:100%; font-size:14px; margin:22px 0; overflow:hidden; border-radius:8px; border:1px solid var(--sep);}
+th,td{border-bottom:1px solid var(--sep); padding:9px 12px; text-align:left;}
+tr:last-child td{border-bottom:none;}
+th{background:var(--hover); font-weight:600;}
+
+code{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:0.88em;
+  background:var(--hover);
+  color:var(--ink);
+  padding:1.5px 5px;
+  border-radius:4px;
+}
+
+/* ── 소개 문단 ─────────────────────────── */
+.intro{
+  background:var(--hover);
+  border-radius:10px;
+  padding:16px 18px;
+  margin:0 0 28px;
+  font-size:14.5px;
+  color:var(--ink-soft);
+}
+.intro p{margin:0 0 10px;}
+.intro p:last-child{margin-bottom:0;}
+.intro b{color:var(--ink); font-weight:600;}
+
+/* ── 글 목록: Finder 리스트처럼 ────────── */
+.post-list{list-style:none; padding:0; margin:0 -10px;}
+.post-list li{margin:0;}
+.post-list a{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  padding:12px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  color:var(--ink);
+}
+.post-list a:hover{background:var(--hover);}
+.post-list a::after{content:"›"; margin-left:auto; color:var(--ink-soft); font-size:17px;}
+.post-list time{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  flex:none;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ── 코드 패널 ─────────────────────────── */
+div.highlighter-rouge, figure.highlight{
+  margin:22px 0;
+  border-radius:10px;
+  overflow:hidden;
+}
+p.filename{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:12px;
+  color:var(--code-dim);
+  background:var(--code-bar);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:9px 16px;
+  margin:22px 0 0;
+  border-radius:10px 10px 0 0;
+}
+p.filename strong{font-weight:500;}
+p.filename + div.highlighter-rouge{margin-top:0; border-radius:0 0 10px 10px;}
 p.filename + div.highlighter-rouge pre{border-radius:0 0 10px 10px;}
-@media (max-width:520px){
-  p.filename{font-size:11.5px; padding-left:76px;}
+pre.highlight, div.highlighter-rouge pre, pre{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  background:var(--code-bg);
+  color:var(--code-fg);
+  border:none;
+  border-radius:10px;
+  padding:16px 18px;
+  margin:0;
+  overflow-x:auto;
+  font-size:13px;
+  line-height:1.7;
 }
 pre code{background:none; color:inherit; padding:0; font-size:inherit;}
 
@@ -140,55 +247,13 @@ pre code{background:none; color:inherit; padding:0; font-size:inherit;}
 .highlight .o, .highlight .ow{color:var(--code-op);}
 .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .se, .highlight .dl{color:var(--code-str);}
 .highlight .nf, .highlight .nx, .highlight .nb{color:var(--code-fn);}
-.highlight .nt, .highlight .nc{color:var(--code-attr);}
-.highlight .na, .highlight .py, .highlight .vi{color:var(--code-attr);}
+.highlight .nt, .highlight .nc, .highlight .na, .highlight .py, .highlight .vi{color:var(--code-attr);}
 .highlight .m, .highlight .mi, .highlight .mf, .highlight .kt{color:var(--code-num);}
 .highlight .p{color:var(--code-op);}
 .highlight .err{color:var(--code-fg);}
-.highlight .gd{color:#f78c8c;} .highlight .gi{color:#a5d6a7;}
-blockquote{
-  margin:20px 0;
-  padding:2px 0 2px 16px;
-  border-left:3px solid var(--line);
-  color:var(--ink-soft);
+.highlight .gd{color:#f07178;} .highlight .gi{color:#c3e88d;}
+
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+@media (prefers-reduced-motion:no-preference){
+  .post-list a{transition:background .12s ease;}
 }
-table{border-collapse:collapse; width:100%; font-size:14px; margin:20px 0;}
-th,td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
-th{background:var(--surface); font-weight:600;}
-.intro{
-  border-left:3px solid var(--stamp);
-  padding:2px 0 2px 18px;
-  margin:0 0 40px;
-  font-size:15px;
-  color:var(--ink-soft);
-}
-.intro p{margin:0 0 12px;}
-.intro p:last-child{margin-bottom:0;}
-.intro b{color:var(--ink); font-weight:600;}
-.post-list{list-style:none; padding:0; margin:0;}
-.post-list li{
-  display:flex;
-  gap:16px;
-  align-items:baseline;
-  padding:14px 0;
-  border-bottom:1px dotted var(--line);
-}
-.post-list time{
-  font-family:"IBM Plex Mono", monospace;
-  font-size:12.5px;
-  color:var(--ink-soft);
-  flex:none;
-  font-variant-numeric:tabular-nums;
-}
-.post-list a{text-decoration:none; color:var(--ink);}
-.post-list a:hover{color:var(--stamp);}
-footer.site{
-  margin-top:64px;
-  padding-top:20px;
-  padding-bottom:56px;
-  border-top:2px dashed var(--line);
-  font-family:"IBM Plex Mono", monospace;
-  font-size:12.5px;
-}
-footer.site a{color:var(--ink-soft); text-decoration:none;}
-:focus-visible{outline:2px solid var(--stamp); outline-offset:3px;}
