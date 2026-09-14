@@ -1,0 +1,45 @@
+{% assign weeks = include.weeks %}
+{% assign post_days = include.post_days %}
+{% assign now_epoch = site.time | date: '%s' | plus: 0 %}
+{% assign today_weekday = site.time | date: '%w' | plus: 0 %}
+{% assign weeks_back_days = weeks | minus: 1 | times: 7 %}
+{% assign days_back = today_weekday | plus: weeks_back_days %}
+{% assign seconds_back = days_back | times: 86400 %}
+{% assign grid_start_epoch = now_epoch | minus: seconds_back %}
+{% assign total_days = weeks | times: 7 | minus: 1 %}
+
+<span class="grass-weekday" style="grid-column:1; grid-row:3;">Mon</span>
+<span class="grass-weekday" style="grid-column:1; grid-row:5;">Wed</span>
+<span class="grass-weekday" style="grid-column:1; grid-row:7;">Fri</span>
+
+{% assign prev_month = "" %}
+{% assign last_week = weeks | minus: 1 %}
+{% for w in (0..last_week) %}
+  {% assign week_offset = w | times: 7 | times: 86400 %}
+  {% assign week_epoch = grid_start_epoch | plus: week_offset %}
+  {% assign month_label = week_epoch | date: "%b" %}
+  {% if month_label != prev_month %}
+    <span class="grass-month" style="grid-column:{{ w | plus: 2 }};">{{ month_label }}</span>
+    {% assign prev_month = month_label %}
+  {% endif %}
+{% endfor %}
+
+{% for i in (0..total_days) %}
+  {% assign week_index = i | divided_by: 7 %}
+  {% assign weekday_row = i | modulo: 7 %}
+  {% assign day_offset = i | times: 86400 %}
+  {% assign day_epoch = grid_start_epoch | plus: day_offset %}
+  {% assign day_str = day_epoch | date: "%Y-%m-%d" %}
+  {% assign needle = day_str | append: "," %}
+  {% assign parts = post_days | split: needle %}
+  {% assign count = parts | size | minus: 1 %}
+  {% assign level = count %}
+  {% if level > 4 %}{% assign level = 4 %}{% endif %}
+  {% assign col = week_index | plus: 2 %}
+  {% assign row = weekday_row | plus: 2 %}
+  {% if day_epoch > now_epoch %}
+    <span class="grass-cell future" style="grid-column:{{ col }}; grid-row:{{ row }};" title="{{ day_str }}"></span>
+  {% else %}
+    <span class="grass-cell level-{{ level }}" style="grid-column:{{ col }}; grid-row:{{ row }};" title="{{ day_str }} · 글 {{ count }}개"></span>
+  {% endif %}
+{% endfor %}
