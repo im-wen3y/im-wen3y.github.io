@@ -225,10 +225,8 @@ code{
   font-variant-numeric:tabular-nums;
 }
 .post-title{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
   min-width:0;
+  text-wrap:pretty;
 }
 
 /* ── 코드 패널 ─────────────────────────── */
