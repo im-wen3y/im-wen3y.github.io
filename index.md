@@ -13,62 +13,14 @@ layout: default
   </p>
 </section>
 
-{% assign post_days = "" %}
-{% for post in site.posts %}
-  {% assign pd = post.date | date: "%Y-%m-%d" %}
-  {% assign post_days = post_days | append: pd | append: "," %}
-{% endfor %}
-{% assign post_days = post_days | append: "end" %}
-
-<aside class="grass-card">
-  <div class="grass-header">
-    <p class="grass-caption">지난 3개월의 발자취</p>
-    <select id="grass-range">
-      <option value="3m" selected>최근 3개월</option>
-      <option value="6m">최근 6개월</option>
-      <option value="1y">최근 1년</option>
-    </select>
-  </div>
-  <div class="grass-grid" data-range="3m" style="grid-template-columns:28px repeat(13, 10px);">
-    {% include grass-grid.html weeks=13 post_days=post_days %}
-  </div>
-  <div class="grass-grid" data-range="6m" style="grid-template-columns:28px repeat(26, 10px);" hidden>
-    {% include grass-grid.html weeks=26 post_days=post_days %}
-  </div>
-  <div class="grass-grid" data-range="1y" style="grid-template-columns:28px repeat(53, 10px);" hidden>
-    {% include grass-grid.html weeks=53 post_days=post_days %}
-  </div>
-</aside>
-
-<script>
-document.getElementById('grass-range').addEventListener('change', function(){
-  var range = this.value;
-  var labels = {"3m":"지난 3개월의 발자취", "6m":"지난 6개월의 발자취", "1y":"지난 1년의 발자취"};
-  document.querySelectorAll('.grass-grid').forEach(function(g){
-    g.hidden = g.dataset.range !== range;
-  });
-  document.querySelector('.grass-caption').textContent = labels[range];
-});
-
-function positionGrassCard(){
-  var win = document.querySelector('.window');
-  var card = document.querySelector('.grass-card');
-  if (card.parentElement !== document.body) document.body.appendChild(card);
-  card.classList.remove('floating');
-  card.style.top = '';
-  card.style.left = '';
-  var winRect = win.getBoundingClientRect();
-  var cardWidth = card.offsetWidth;
-  var spaceRight = window.innerWidth - winRect.right;
-  if (spaceRight >= cardWidth + 24) {
-    card.classList.add('floating');
-    card.style.top = (winRect.top + window.scrollY) + 'px';
-    card.style.left = (winRect.right + 24) + 'px';
-  }
-}
-window.addEventListener('load', positionGrassCard);
-window.addEventListener('resize', positionGrassCard);
-</script>
+<ul class="post-list pinned">
+  <li>
+    <a href="{{ '/study/' | relative_url }}">
+      <time>📌 고정</time>
+      <span class="post-title">앞으로 공부할 목록</span>
+    </a>
+  </li>
+</ul>
 
 {% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 {% assign current_year = years[0].name %}
