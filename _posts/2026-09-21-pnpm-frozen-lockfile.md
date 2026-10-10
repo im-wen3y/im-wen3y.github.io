@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "CI에서 lockfile을 그대로 쓰게 하기 — pnpm --frozen-lockfile"
+title: "CI에서는 pnpm install에 --frozen-lockfile을 붙이자"
 date: 2026-09-21 22:00:00 +0900
 ---
 
@@ -26,4 +26,4 @@ pnpm install --frozen-lockfile
 
 ---
 
-참고: [pnpm install — --frozen-lockfile](https://pnpm.io/cli/install#--frozen-lockfile)
+참고: [pnpm install --frozen-lockfile](https://pnpm.io/cli/install#--frozen-lockfile)

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "내용이 같은데 Effect가 다시 돈다 — 객체 의존성과 원시 필드"
+title: "내용이 같은데 Effect가 다시 도는 이유"
 date: 2026-09-21 14:00:00 +0900
 ---
 

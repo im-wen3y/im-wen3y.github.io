@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "cancelQueries는 캐시를 지우지 않는다 — 낙관적 업데이트의 순서"
+title: "cancelQueries는 캐시를 지우는 함수가 아니었다"
 date: 2026-09-21 16:00:00 +0900
 ---
 
@@ -43,4 +43,4 @@ onSettled: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
 
 ---
 
-참고: [TanStack Query — Optimistic Updates](https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates)
+참고: [TanStack Query Optimistic Updates](https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates)

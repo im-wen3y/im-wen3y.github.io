@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "API가 느려도 INP는 좋아질 수 있다 — INP가 재는 것"
+title: "API가 느려도 INP는 좋아질 수 있다"
 date: 2026-09-21 19:00:00 +0900
 ---
 
@@ -30,4 +30,4 @@ INP(Interaction to Next Paint)는 사용자가 클릭·탭·키 입력을 한 �
 
 ---
 
-참고: [web.dev — Interaction to Next Paint (INP)](https://web.dev/articles/inp)
+참고: [web.dev Interaction to Next Paint (INP)](https://web.dev/articles/inp)

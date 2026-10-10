@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "isLoading 하나로는 부족하다 — TanStack Query 상태 플래그 구분"
+title: "isLoading 하나로는 로딩 상태를 다 나눌 수 없다"
 date: 2026-09-21 20:00:00 +0900
 ---
 
@@ -28,4 +28,4 @@ date: 2026-09-21 20:00:00 +0900
 
 ---
 
-참고: [TanStack Query — Queries](https://tanstack.com/query/latest/docs/framework/react/guides/queries) · [TanStack Query — Placeholder Query Data](https://tanstack.com/query/latest/docs/framework/react/guides/placeholder-query-data)
+참고: [TanStack Query Queries](https://tanstack.com/query/latest/docs/framework/react/guides/queries) · [TanStack Query Placeholder Query Data](https://tanstack.com/query/latest/docs/framework/react/guides/placeholder-query-data)

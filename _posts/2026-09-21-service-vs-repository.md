@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "데이터를 가져오는 함수와 절차를 묶는 함수 — Service와 Repository 구분"
+title: "API를 부르는 함수가 다 Service는 아니었다"
 date: 2026-09-21 13:00:00 +0900
 ---
 

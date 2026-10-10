@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "저장한 사람이 바로 새 데이터를 봐야 할 때 — Next.js updateTag"
+title: "저장하고 바로 새 데이터를 보여주고 싶을 때 쓰는 updateTag"
 date: 2026-09-21 21:00:00 +0900
 ---
 
@@ -33,4 +33,4 @@ export async function saveProduct(form: FormData) {
 
 ---
 
-참고: [Next.js — updateTag](https://nextjs.org/docs/app/api-reference/functions/updateTag) · [Next.js — revalidateTag](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
+참고: [Next.js updateTag](https://nextjs.org/docs/app/api-reference/functions/updateTag) · [Next.js revalidateTag](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)

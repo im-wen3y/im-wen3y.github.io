@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "axios 에러는 Error Boundary까지 오지 않는다 — Error Boundary가 잡는 범위"
+title: "axios 에러는 왜 Error Boundary에 안 잡힐까"
 date: 2026-09-21 17:00:00 +0900
 ---
 
@@ -37,4 +37,4 @@ TanStack Query의 요청 에러는 원래 `error` 값으로만 돌아온다. `th
 
 ---
 
-참고: [Error Boundary로 렌더링 에러 잡기](https://ko.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) · [TanStack Query useQuery — throwOnError](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)
+참고: [Error Boundary로 렌더링 에러 잡기](https://ko.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) · [TanStack Query useQuery throwOnError](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)

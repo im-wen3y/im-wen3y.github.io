@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Suspense는 에러를 받지 않는다 — Next.js loading.tsx와 error.tsx"
+title: "useSuspenseQuery 에러는 loading.tsx가 아니라 error.tsx로 간다"
 date: 2026-09-21 18:00:00 +0900
 ---
 
@@ -27,4 +27,4 @@ date: 2026-09-21 18:00:00 +0900
 
 ---
 
-참고: [Next.js — loading.js](https://nextjs.org/docs/app/api-reference/file-conventions/loading) · [Next.js — error.js](https://nextjs.org/docs/app/api-reference/file-conventions/error)
+참고: [Next.js loading.js](https://nextjs.org/docs/app/api-reference/file-conventions/loading) · [Next.js error.js](https://nextjs.org/docs/app/api-reference/file-conventions/error)

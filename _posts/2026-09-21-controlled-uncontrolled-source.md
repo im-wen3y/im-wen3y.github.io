@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "부모가 상태를 가졌는데 내부 state도 바뀐다 — Controlled와 Uncontrolled 함께 지원하기"
+title: "Controlled일 때 내부 state를 건드리면 안 되는 이유"
 date: 2026-09-21 15:00:00 +0900
 ---
 
