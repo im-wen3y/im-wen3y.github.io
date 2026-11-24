@@ -1,0 +1,80 @@
+/* im-wen3y.dev 디자인 시스템 — generated from tokens.json */
+:root, [data-theme="light"] {
+  --bg-canvas: #ffffff;
+  --bg-surface: #f8f9fb;
+  --bg-accent-subtle: #eef3fa;
+  --bg-code: #1b1e24;
+  --text-primary: #1a1d24;
+  --text-secondary: #69707d;
+  --text-on-accent: #ffffff;
+  --text-accent-strong: #2f5490;
+  --accent-primary: #476eae;
+  --accent-hover: #3a5d96;
+  --border-default: #e8ebef;
+  --control-disabled: #b8bdc6;
+  --code-text: #f2f3f5;
+  --code-comment: #a4aab5;
+  --code-keyword: #82a7e0;
+  --code-border: #30343c;
+  --focus-ring: var(--accent-primary);
+  --shadow-float: 0 2px 8px rgba(26, 29, 36, 0.08);
+}
+[data-theme="dark"] {
+  --bg-canvas: #111318;
+  --bg-surface: #1b1e24;
+  --bg-accent-subtle: #1f2a3c;
+  --bg-code: #1b1e24;
+  --text-primary: #f2f3f5;
+  --text-secondary: #a4aab5;
+  --text-on-accent: #111318;
+  --text-accent-strong: #a9c3ea;
+  --accent-primary: #82a7e0;
+  --accent-hover: #a3bfea;
+  --border-default: #30343c;
+  --control-disabled: #4a4f58;
+  --code-text: #f2f3f5;
+  --code-comment: #a4aab5;
+  --code-keyword: #82a7e0;
+  --code-border: #30343c;
+  --focus-ring: var(--accent-primary);
+  --shadow-float: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-full: 999px;
+  --layout-content-max: 1184px;
+  --layout-gutter: 128px;
+  --layout-gutter-tablet: 40px;
+  --layout-gutter-mobile: 20px;
+  --layout-article: 720px;
+  --layout-toc: 220px;
+  --layout-header: 88px;
+  --layout-header-mobile: 72px;
+  --layout-touch: 44px;
+  --font-sans: "IBM Plex Sans KR", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-logo: "Bungee", "IBM Plex Sans KR", system-ui, sans-serif;
+}
+.logo { font-family: var(--font-logo); font-size: 26px; line-height: 1.3; font-weight: 400; }
+.display { font-family: var(--font-sans); font-size: 56px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+.heading-1 { font-family: var(--font-sans); font-size: 44px; line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; }
+.heading-2 { font-family: var(--font-sans); font-size: 32px; line-height: 1.3; font-weight: 700; }
+.heading-3 { font-family: var(--font-sans); font-size: 28px; line-height: 1.4; font-weight: 700; }
+.title { font-family: var(--font-sans); font-size: 26px; line-height: 1.4; font-weight: 700; }
+.lead { font-family: var(--font-sans); font-size: 20px; line-height: 1.6; font-weight: 400; }
+.body { font-family: var(--font-sans); font-size: 18px; line-height: 1.8; font-weight: 400; }
+.body-sm { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 16px; line-height: 1.5; font-weight: 500; }
+.eyebrow { font-family: var(--font-sans); font-size: 15px; line-height: 1.4; font-weight: 700; }
+.caption { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; font-weight: 500; }
+.code { font-family: var(--font-mono); font-size: 15px; line-height: 1.8; font-weight: 400; }
