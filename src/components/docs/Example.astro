@@ -1,0 +1,37 @@
+---
+import Button from '../Button.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import TextLink from '../TextLink.astro';
+import TopicChip from '../TopicChip.astro';
+import Tag from '../Tag.astro';
+import PostCard from '../PostCard.astro';
+import PostListItem from '../PostListItem.astro';
+import Pagination from '../Pagination.astro';
+interface Props { kind: string; compact?: boolean; }
+const { kind, compact = false } = Astro.props;
+const post = { href: '#usage', title: '버그 세 개를 각각 쫓다가, 뿌리가 하나였다', description: '서버와 클라이언트의 로그인 상태를 추적한 기록.', publishedDate: '2026-10-15', topic: 'Next.js' };
+---
+<div class:list={['example-content', { compact }]}>
+  {kind === 'header' && <Header pathname="/blog" />}
+  {kind === 'footer' && <Footer />}
+  {kind === 'button' && <><Button data-demo-action icon="arrow_forward">글 둘러보기</Button><Button variant="secondary" data-demo-action>모든 글 보기</Button>{!compact && <><Button variant="small" data-demo-action>동작 확인하기</Button><Button disabled>비활성 버튼</Button><p class="demo-result caption" role="status" aria-live="polite"></p></>}</>}
+  {kind === 'text-link' && <><TextLink href="#usage">전체 글 보기</TextLink><TextLink href="https://github.com/im-wen3y" external>GitHub</TextLink></>}
+  {kind === 'topic-chip' && <><TopicChip href="#usage" selected>전체</TopicChip><TopicChip href="#usage">React</TopicChip><TopicChip href="#usage">TypeScript</TopicChip></>}
+  {kind === 'tag' && <><Tag href="#usage">Next.js</Tag><Tag href="#usage">React</Tag><Tag href="#usage">TanStack Query</Tag></>}
+  {kind === 'post-card' && <PostCard {...post} metaOrder="topic-first" />}
+  {kind === 'post-list-item' && <PostListItem {...post} metaOrder="date-first" />}
+  {kind === 'pagination' && <Pagination currentPage={2} totalPages={3} pageHref={page => `/design-system/pagination#page-${page}`} />}
+</div>
+<style>
+  .example-content { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-4); width: 100%; min-width: 0; }
+  .example-content :global(.w-post) { width: 100%; max-width: var(--layout-article); }
+  .compact :global(.w-post) { padding-block: var(--space-3); }
+  .compact :global(.w-post__title) { font-size: 16px; }
+  .compact :global(.w-post__summary) { font-size: 14px; }
+  .compact :global(.w-post__foot) { margin-top: var(--space-2); }
+  .demo-result { flex-basis: 100%; text-align: center; color: var(--text-secondary); }
+  .example-content :global(.site-container) { padding-inline: var(--space-4); }
+  .compact :global(.header-inner) { flex-direction: column; justify-content: center; padding-block: var(--space-4); }
+  .compact :global(.w-footer) { flex-direction: column-reverse; align-items: flex-start; }
+</style>

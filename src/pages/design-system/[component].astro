@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/DesignSystemLayout.astro';
+import Example from '../../components/docs/Example.astro';
+import Pagination from '../../components/Pagination.astro';
+import { catalog } from '../../design-system/catalog';
+export function getStaticPaths() { return catalog.map(item => ({ params: { component: item.id }, props: { item } })); }
+const { item } = Astro.props;
+const usage = `---\nimport ${item.component} from '../components/${item.component}.astro';\nimport '../styles/global.css';\n---\n\n${item.code}`;
+---
+<Layout title={item.name} active={item.id}>
+  <article class="doc-article">
+    <div class="docs-intro"><a class="caption muted" href="/design-system">컴포넌트</a><h1 class="heading-1">{item.name}</h1><p class="body muted">{item.description}</p></div>
+    <section id="preview"><h2 class="heading-3">미리보기</h2><div class="detail-preview"><Example kind={item.id} /></div></section>
+    <section id="usage"><h2 class="heading-3">사용 방법</h2><p class="body-sm muted">아래 코드를 페이지에서 사용합니다. 공통 레이아웃의 head에는 Fonts 컴포넌트를 넣어 글꼴을 불러옵니다.</p><div class="code-panel"><div class="code-head"><span class="caption">Astro</span><button class="copy-button" data-copy-code aria-live="polite">코드 복사</button></div><pre><code id="usage-code">{usage}</code></pre></div></section>
+    <section id="properties"><h2 class="heading-3">속성</h2><table class="props-table"><thead><tr><th>속성</th><th>설명</th><th>기본값</th></tr></thead><tbody>{item.properties.map(([name, description, value]) => <tr><th scope="row"><code>{name}</code></th><td>{description}</td><td>{value}</td></tr>)}</tbody></table></section>
+    <section id="guidelines"><h2 class="heading-3">사용 규칙</h2><p class="body-sm">{item.rule}</p><p class="body-sm muted">라이트·다크에서 같은 색상 토큰을 사용합니다. Tab 키로 이동해 포커스를 확인할 수 있습니다.</p></section>
+    {item.id === 'pagination' && <section id="states"><h2 class="heading-3">상태별 예시</h2>{[1,2,3].map(page => <div id={`page-${page}`} class="state-preview"><p class="caption muted">{page}페이지</p><Pagination currentPage={page} totalPages={3} pageHref={number => `#page-${number}`} label={`${page}페이지 예시`} /></div>)}<p class="body-sm muted">전체가 한 페이지인 경우 아래에 페이지 번호를 표시하지 않습니다.</p><Pagination currentPage={1} totalPages={1} pageHref={() => '#states'} /></section>}
+    <footer class="docs-footer"><a class="w-link" href="/design-system">전체 컴포넌트 보기</a></footer>
+  </article>
+  <nav class="docs-toc" aria-label="이 문서의 목차"><p class="caption muted">이 문서에서</p><a href="#preview">미리보기</a><a href="#usage">사용 방법</a><a href="#properties">속성</a><a href="#guidelines">사용 규칙</a>{item.id === 'pagination' && <a href="#states">상태별 예시</a>}</nav>
+</Layout>

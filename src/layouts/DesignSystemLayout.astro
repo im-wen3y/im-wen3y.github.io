@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import '../styles/docs.css';
+import Fonts from '../components/Fonts.astro';
+import Icon from '../components/Icon.astro';
+import { catalog } from '../design-system/catalog';
+interface Props { title: string; active?: string; }
+const { title, active = '' } = Astro.props;
+---
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>{title} | im-wen3y.dev 디자인 시스템</title><Fonts />
+  <script is:inline>
+    try { document.documentElement.dataset.theme = localStorage.getItem('docs-theme') === 'dark' ? 'dark' : 'light'; } catch {}
+  </script>
+</head>
+<body class="docs">
+  <a class="skip" href="#content">본문으로 건너뛰기</a>
+  <header class="docs-header">
+    <a class="logo" href="/design-system">im-wen3y.dev</a>
+    <nav aria-label="상단 메뉴"><a href="/design-system" aria-current="page">컴포넌트</a><a href="/">블로그</a></nav>
+    <button id="docs-theme" class="w-iconbtn" aria-label="다크 테마" aria-pressed="false"><Icon name="contrast" /></button>
+  </header>
+  <div class="docs-shell">
+    <aside class="docs-sidebar">
+      <details open><summary>컴포넌트 목록</summary><nav aria-label="컴포넌트 목록">
+        <a href="/design-system" aria-current={!active ? 'page' : undefined}>전체 보기</a>
+        <p class="caption">컴포넌트</p>
+        {catalog.map(item => <a href={`/design-system/${item.id}`} aria-current={active === item.id ? 'page' : undefined}>{item.name}</a>)}
+      </nav></details>
+    </aside>
+    <main id="content" class:list={['docs-main', { 'is-detail': active }]}><slot /></main>
+  </div>
+  <script>
+    const toggle = document.querySelector<HTMLButtonElement>('#docs-theme');
+    toggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    toggle?.addEventListener('click', () => {
+      const dark = document.documentElement.dataset.theme !== 'dark';
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      toggle.setAttribute('aria-pressed', String(dark));
+      try { localStorage.setItem('docs-theme', dark ? 'dark' : 'light'); } catch {}
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-demo-action]').forEach(button => button.addEventListener('click', () => {
+      const status = button.closest('.example-content')?.querySelector('.demo-result');
+      if (status) status.textContent = '버튼 동작을 확인했습니다.';
+    }));
+    document.querySelector<HTMLButtonElement>('[data-copy-code]')?.addEventListener('click', async event => {
+      const button = event.currentTarget as HTMLButtonElement;
+      try { await navigator.clipboard.writeText(document.querySelector('#usage-code')?.textContent ?? ''); button.textContent = '복사됨'; }
+      catch { button.textContent = '복사 실패'; }
+      setTimeout(() => { button.textContent = '코드 복사'; }, 2000);
+    });
+    const search = document.querySelector<HTMLInputElement>('#component-search');
+    search?.addEventListener('input', () => {
+      const query = search.value.trim().toLowerCase();
+      let count = 0;
+      document.querySelectorAll<HTMLElement>('[data-component]').forEach(card => {
+        card.hidden = !(card.dataset.component ?? '').toLowerCase().includes(query);
+        if (!card.hidden) count++;
+      });
+      const status = document.querySelector('#search-status');
+      if (status) status.textContent = count ? `컴포넌트 ${count}개` : '일치하는 컴포넌트가 없습니다. 다른 이름으로 검색해 보세요.';
+    });
+  </script>
+</body>
+</html>

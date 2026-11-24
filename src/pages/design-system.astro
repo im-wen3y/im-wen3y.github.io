@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/DesignSystemLayout.astro';
+import Example from '../components/docs/Example.astro';
+import { catalog } from '../design-system/catalog';
+---
+<Layout title="컴포넌트">
+  <div class="docs-intro"><h1 class="heading-1">컴포넌트</h1><p class="body muted">블로그를 만드는 작은 요소들을 둘러보세요.</p></div>
+  <div class="catalog-tools"><label class="search-field"><span class="w-sr">컴포넌트 검색</span><input id="component-search" type="search" placeholder="컴포넌트 이름으로 검색" /></label><span id="search-status" class="caption muted" role="status">컴포넌트 {catalog.length}개</span></div>
+  <div class="catalog-grid">
+    {catalog.map(item => <article class="catalog-item" data-component={`${item.name} ${item.component}`}>
+      <div class="catalog-preview" inert aria-hidden="true"><Example kind={item.id} compact /></div>
+      <h2 class="lead"><a href={`/design-system/${item.id}`}>{item.name}</a></h2>
+      <p class="caption muted">{item.description}</p>
+    </article>)}
+  </div>
+  <footer class="docs-footer caption muted">im-wen3y.dev 디자인 시스템</footer>
+</Layout>
