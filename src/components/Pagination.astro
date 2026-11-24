@@ -1,0 +1,19 @@
+---
+import TextLink from './TextLink.astro';
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  pageHref: (page: number) => string;
+  label?: string;
+}
+const { currentPage, totalPages, pageHref, label = '페이지' } = Astro.props;
+if (!Number.isInteger(totalPages) || totalPages < 0 || !Number.isInteger(currentPage) || currentPage < 1 || currentPage > Math.max(1, totalPages)) {
+  throw new Error('페이지 번호와 전체 페이지 수를 확인해 주세요.');
+}
+const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+---
+{totalPages > 1 && <nav class="w-pages" aria-label={label}>
+  {currentPage > 1 && <TextLink href={pageHref(currentPage - 1)} icon="arrow_back">이전</TextLink>}
+  {pages.map(page => <a class="w-page" href={pageHref(page)} aria-label={`${page}페이지`} aria-current={page === currentPage ? 'page' : undefined}>{page}</a>)}
+  {currentPage < totalPages && <TextLink href={pageHref(currentPage + 1)}>다음</TextLink>}
+</nav>}
