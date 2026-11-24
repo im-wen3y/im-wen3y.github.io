@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+type Shared = { variant?: 'primary' | 'secondary' | 'small'; icon?: string };
+type Props = Shared & (
+  | (HTMLAttributes<'a'> & { href: string; disabled?: never })
+  | (HTMLAttributes<'button'> & { href?: never })
+);
+const { href, variant = 'primary', icon, class: className, ...attributes } = Astro.props;
+const classes = ['w-btn', `w-btn--${variant}`, className];
+---
+{href !== undefined ? (
+  <a {...attributes} href={href} class:list={classes}><slot />{icon && <Icon name={icon} />}</a>
+) : (
+  <button type="button" {...attributes} class:list={classes}><slot />{icon && <Icon name={icon} />}</button>
+)}

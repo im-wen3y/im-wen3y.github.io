@@ -1,0 +1,9 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+interface Props extends HTMLAttributes<'a'> { href: string; external?: boolean; icon?: string; }
+const { external = false, icon, class: className, ...attributes } = Astro.props;
+---
+<a {...attributes} class:list={['w-link', { 'w-link--external': external }, className]} target={external ? '_blank' : attributes.target} rel={external ? 'noopener noreferrer' : attributes.rel}>
+  <slot /><Icon name={external ? 'arrow_outward' : (icon ?? 'arrow_forward')} />
+</a>
