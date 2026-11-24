@@ -1,0 +1,10 @@
+---
+interface Props { publishedDate: string; topic: string; order: 'topic-first' | 'date-first'; }
+const { publishedDate, topic, order } = Astro.props;
+const date = publishedDate.slice(0, 10);
+---
+<span class="w-meta">
+  {order === 'topic-first' && <>{topic} · </>}
+  <time datetime={publishedDate}>{date.replaceAll('-', '.')}</time>
+  {order === 'date-first' && <> · {topic}</>}
+</span>

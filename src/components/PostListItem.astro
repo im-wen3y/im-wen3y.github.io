@@ -1,0 +1,6 @@
+---
+import PostCard from './PostCard.astro';
+import type { Props as PostCardProps } from './PostCard.astro';
+type Props = Omit<PostCardProps, 'variant'>;
+---
+<PostCard {...Astro.props} variant="list" />

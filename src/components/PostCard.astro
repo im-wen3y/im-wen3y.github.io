@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import PostMeta from './PostMeta.astro';
+export interface Props {
+  href: string;
+  title: string;
+  description: string;
+  publishedDate: string;
+  topic: string;
+  metaOrder: 'topic-first' | 'date-first';
+  variant?: 'card' | 'list';
+}
+const { href, title, description, publishedDate, topic, metaOrder, variant = 'card' } = Astro.props;
+---
+<a href={href} class:list={['w-post', { 'w-post--list': variant === 'list' }]}>
+  <PostMeta publishedDate={publishedDate} topic={topic} order={metaOrder} />
+  <span class="w-post__title">{title}</span>
+  <span class="w-post__summary">{description}</span>
+  {variant === 'card' && <span class="w-post__foot"><Icon name="arrow_outward" /></span>}
+</a>
