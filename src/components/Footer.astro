@@ -1,0 +1,18 @@
+---
+import TextLink from './TextLink.astro';
+interface Props { showVelog?: boolean; }
+const { showVelog = true } = Astro.props;
+---
+<footer class="site-container">
+  <div class="w-footer">
+    <p>© {new Date().getFullYear()} im-wen3y.dev</p>
+    <nav class="w-footer__links" aria-label="외부 링크">
+      <TextLink href="https://github.com/im-wen3y/im-wen3y.github.io" external>GitHub</TextLink>
+      {showVelog && <TextLink href="https://velog.io/@imwen3y/posts" external>Velog</TextLink>}
+    </nav>
+  </div>
+</footer>
+<style>
+  footer { width: 100%; }
+  @media (max-width: 767px) { .w-footer { flex-direction: column-reverse; align-items: flex-start; } }
+</style>

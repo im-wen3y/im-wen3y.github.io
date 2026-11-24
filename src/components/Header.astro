@@ -1,0 +1,23 @@
+---
+interface Props { pathname?: string; }
+const { pathname = Astro.url.pathname } = Astro.props;
+const isPosts = pathname === '/blog' || pathname.startsWith('/blog/') || pathname === '/tags' || pathname.startsWith('/tags/');
+const isSearch = pathname === '/search' || pathname.startsWith('/search/');
+---
+<header class="site-header">
+  <div class="site-container header-inner">
+    <a class="w-logo" href="/">im-wen3y.dev</a>
+    <nav aria-label="주 메뉴">
+      <a href="/blog" aria-current={isPosts ? 'page' : undefined}>글</a>
+      <a href="/search" aria-current={isSearch ? 'page' : undefined}>검색</a>
+    </nav>
+  </div>
+</header>
+<style>
+  .site-header { width: 100%; border-bottom: 1px solid var(--border-default); background: var(--bg-canvas); }
+  .header-inner { min-height: var(--layout-header); display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
+  nav { display: flex; align-items: center; gap: var(--layout-gutter-tablet); }
+  nav a { display: inline-flex; align-items: center; min-height: var(--layout-touch); color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+  nav a[aria-current] { color: var(--text-primary); font-weight: 700; }
+  @media (max-width: 767px) { .header-inner { min-height: var(--layout-header-mobile); gap: var(--space-3); } .w-logo { font-size: 21px; } nav { gap: var(--space-4); } }
+</style>

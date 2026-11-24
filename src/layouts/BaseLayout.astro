@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+interface Props { title?: string; description?: string; showVelog?: boolean; }
+const { title, description, showVelog = true } = Astro.props;
+---
+<!doctype html>
+<html lang="ko" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title ? `${title} | im-wen3y.dev` : 'im-wen3y.dev'}</title>
+    {description && <meta name="description" content={description} />}
+    <Fonts />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+    <Header />
+    <main id="main-content" class="site-container" tabindex="-1"><slot /></main>
+    <Footer showVelog={showVelog} />
+  </body>
+</html>
+<style>
+  body { min-height: 100dvh; display: flex; flex-direction: column; }
+  main { width: 100%; flex: 1; padding-block: var(--space-16); }
+  .skip-link { position: absolute; z-index: 20; top: var(--space-2); left: var(--space-2); padding: var(--space-3); background: var(--bg-canvas); color: var(--text-primary); transform: translateY(-200%); }
+  .skip-link:focus { transform: translateY(0); }
+  @media (max-width: 767px) { main { padding-block: var(--space-12); } }
+</style>
