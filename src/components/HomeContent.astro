@@ -1,0 +1,52 @@
+---
+import Button from './Button.astro';
+import TextLink from './TextLink.astro';
+import TopicChip from './TopicChip.astro';
+import PostCard from './PostCard.astro';
+import { formatDate, postHref, sortPublishedPosts, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+  topics: { name: string; slug: string }[];
+  recentPostCount: number;
+  showBottomLink: boolean;
+}
+const { posts, topics, recentPostCount, showBottomLink } = Astro.props;
+const recentPosts = sortPublishedPosts(posts).slice(0, recentPostCount);
+---
+<div class="home-content">
+  <section class="hero" aria-labelledby="home-title">
+    <h1 id="home-title" class="display">문제와 선택의 기록.</h1>
+    <p class="lead">프론트엔드 개발 과정에서 고민하고, 시도하고, 배운 것들을 기록합니다.</p>
+    <Button href="/blog" icon="arrow_forward">글 둘러보기</Button>
+  </section>
+  {recentPosts.length > 0 && topics.length > 0 && <section aria-labelledby="topics-title">
+    <h2 id="topics-title" class="heading-2">주제 둘러보기</h2>
+    <div class="topics">{topics.map(topic => <TopicChip href={`/tags/${encodeURIComponent(topic.slug)}`}>{topic.name}</TopicChip>)}</div>
+  </section>}
+  <section aria-labelledby="recent-title">
+    <div class="section-heading"><h2 id="recent-title" class="heading-2">최근 글</h2><TextLink href="/blog">전체 보기</TextLink></div>
+    {recentPosts.length ? <div class="posts">{recentPosts.map(post => <PostCard
+      href={postHref(post)} title={post.data.title} description={post.data.description}
+      publishedDate={formatDate(post.data.publishedDate).replaceAll('.', '-')} topic={post.data.tags[0]!} metaOrder="topic-first"
+    />)}</div> : <p class="empty body">아직 공개된 글이 없습니다.</p>}
+    {showBottomLink && <div class="all-posts"><Button variant="secondary" href="/blog">모든 글 보기</Button></div>}
+  </section>
+</div>
+<style>
+  .home-content { display: grid; gap: var(--space-24); }
+  .hero { display: grid; justify-items: start; gap: var(--space-6); padding-block: var(--space-8); }
+  .hero p { max-width: var(--layout-article); color: var(--text-secondary); }
+  section { min-width: 0; }
+  .topics { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+  .section-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .posts { border-bottom: 1px solid var(--border-default); }
+  .empty { padding-block: var(--space-8); border-top: 1px solid var(--border-default); color: var(--text-secondary); }
+  .all-posts { display: flex; justify-content: center; margin-top: var(--space-8); }
+  @media (max-width: 767px) {
+    .home-content { gap: var(--space-12); }
+    .hero { padding-block: var(--space-4); }
+    .display { font-size: 34px; line-height: 1.3; }
+    .lead { font-size: 17px; line-height: 1.7; }
+  }
+</style>

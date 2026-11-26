@@ -1,16 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TextLink from '../components/TextLink.astro';
+import HomeContent from '../components/HomeContent.astro';
+import { getPublishedPosts, getTags } from '../lib/posts';
+
+const posts = await getPublishedPosts();
+const topics = getTags(posts);
 ---
-<BaseLayout title="공통 레이아웃 미리보기">
-  <div class="preview-intro">
-    <h1 class="heading-1">공통 레이아웃 미리보기</h1>
-    <p class="body">Header와 Footer 사이에 각 페이지의 콘텐츠가 들어갑니다.</p>
-    <p class="body-sm">글 목록과 검색 페이지는 후속 작업에서 연결합니다.</p>
-    <TextLink href="/design-system">컴포넌트 둘러보기</TextLink>
-  </div>
+<BaseLayout description="프론트엔드 개발 과정에서 고민하고, 시도하고, 배운 것들을 기록합니다.">
+  <HomeContent posts={posts} topics={topics} recentPostCount={5} showBottomLink={true} />
 </BaseLayout>
-<style>
-  .preview-intro { display: grid; justify-items: start; gap: var(--space-6); max-width: var(--layout-article); }
-  p { color: var(--text-secondary); }
-</style>
